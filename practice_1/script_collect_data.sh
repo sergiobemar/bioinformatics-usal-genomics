@@ -3,8 +3,8 @@
 ##############################################################################
 # Return the current date tiem in string format without spaces, for namefiles
 ##############################################################################
-function_get_now_logs() {
-    date +"%Y%m%d_%H%M%S"
+function_get_now() {
+    date +"%Y-%m-%d %H:%M:%S"
 }
 
 rename_to_lower_files() {
@@ -25,16 +25,18 @@ copy_sample_files() {
     # Copy original gen samples (fastq.gz) to my folder 
     for f in $(find /home/practicasGenomica/ -name "*.fastq.gz")
     do
+        echo ""
+        echo "--------------------------------------------------------------------------------------------------------------------------------------"
+        echo "$(function_get_now) copy_sample_files(): File ${f}"
+        echo "--------------------------------------------------------------------------------------------------------------------------------------"
+
         # Get all names, removing extension and convert to lower
         file=$(basename $f)
         file=$(echo "${file%.fastq.gz}")
         folder=$(echo $file |  awk '{print tolower($0)}')
 
         # Create folder for fastaq files
-        echo ""
-        echo "--------------------------------------------------------------------------------------------------------------------------------------"
         echo "$(function_get_now) copy_sample_files(): Creating directory: ${folder}"
-        echo "--------------------------------------------------------------------------------------------------------------------------------------"
         mkdir $folder
 
         # Copy files to directory
