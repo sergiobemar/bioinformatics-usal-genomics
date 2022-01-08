@@ -85,7 +85,6 @@ function_compress_sam() {
 }
 
 ##############################################################################
-#
 # Main function to lauch all the script
 #
 # Arguments:
