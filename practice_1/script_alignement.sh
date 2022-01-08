@@ -44,6 +44,7 @@ function_bowtie_alignement_genome() {
 
         sam_result="${filename_result}.sam"
         bam_result="${filename_result}.bam"
+        bai_result="${filename_result}.bai"
 
         echo ""
         echo "--------------------------------------------------------------------------------------------------------------------------------------"
@@ -57,6 +58,10 @@ function_bowtie_alignement_genome() {
 
         # Compress .sam to .bam file
         function_compress_sam $sam_result $bam_result
+
+        # Index .bam result to baiecho ""
+        echo "$(function_get_now) function_alignement_genome(): Indexing BAM file, the result will be saved in ${bai_result}"
+        samtools index $bam_result $bai_result
     done
 }
 
@@ -84,8 +89,8 @@ function_compress_sam() {
 #
 ##############################################################################
 main() {
-    function_bowtie_alignement_genome index_ref 1
+    function_bowtie_alignement_genome index_ref $1
 }
 
 # Launch script
-main
+main $1
