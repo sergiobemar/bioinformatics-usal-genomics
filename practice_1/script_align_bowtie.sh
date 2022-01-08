@@ -26,6 +26,7 @@ function_get_now_logs() {
 ##############################################################################
 function_bowtie_alignement_genome() {
 
+    # Use a more readable variables for input parameters
     index_ref=$1
     number_missmatch=$2
 
@@ -35,13 +36,13 @@ function_bowtie_alignement_genome() {
 
     for f in $(find . -name "*.fastq")
     do
-
        
         # Extract file (with extension) and filename (without extension)
         file=$(basename $f)
         filename_result="$results_directory/${file%.*}_${2}"
         dir=$(dirname $f)
 
+        # Create the variables with the names for files SAM, BAM and BAI
         sam_result="${filename_result}.sam"
         bam_result="${filename_result}.bam"
         bai_result="${filename_result}.bai"
@@ -87,10 +88,12 @@ function_compress_sam() {
 #
 # Main function to lauch all the script
 #
+# Arguments:
+#   - Number of missmatches
 ##############################################################################
 main() {
     function_bowtie_alignement_genome index_ref $1
 }
 
-# Launch script
+# Launch script passing the argument 
 main $1
