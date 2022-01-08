@@ -77,3 +77,15 @@ function_compress_sam() {
     samtools sort -@ 16 -o $2 $1
     rm $1
 }
+
+##############################################################################
+#
+# Main function to lauch all the script
+#
+##############################################################################
+main() {
+    function_bowtie_alignement_genome index_ref 1
+}
+
+# Launch script
+main
