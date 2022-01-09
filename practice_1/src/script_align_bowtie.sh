@@ -122,30 +122,3 @@ main_bowtie_align() {
     echo "$(function_get_now) Launching command: function_bowtie_alignement_genome ${path_bowtie_index} ${number_mismatch} ${path_data} ${path_results}"
     function_bowtie_alignement_genome $path_bowtie_index $number_mismatch $path_data $path_results
 }
-
-##############################################################################
-# Main function to the index of the reference genome
-#
-# Arguments:
-#   - Input path of the reference genome
-#   - Directory path of the index created by bowtie
-#   - Output 
-##############################################################################
-main_bowtie_create_index() {
-
-    # Use a more readable variables for input parameters
-    reference_genome=$1
-    path_index=$2
-
-    # Create directory for index
-    mkdir $path_index
-
-    # Create the index files variable
-    path_data="data"
-    index_files="${path_index}/index_`basename ${reference_genome%.*}`"
-    
-    # Index reference genome
-    function_bowtie_create_index $index_files $reference_genome
-
-    return $index_files
-}
