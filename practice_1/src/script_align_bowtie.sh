@@ -12,18 +12,20 @@ source ./utils.sh
 # Arguments:
 #   - Reference gen indexed previously
 #   - Number of missmatches
+#   - Path of directory where the data is stored
 ##############################################################################
 function_bowtie_alignement_genome() {
 
     # Use a more readable variables for input parameters
     index_ref=$1
     number_missmatch=$2
+    path_data=$3
 
     # Create directory for results
-    results_directory="bowtie_results_missmatch_missmatches_${number_missmatch}"
+    results_directory="${path_data}/bowtie_results_missmatch_missmatches_${number_missmatch}"
     mkdir $results_directory
 
-    for f in $(find . -name "*.fastq")
+    for f in $(find $path_data -name "*.fastq")
     do
        
         # Extract file (with extension) and filename (without extension)
@@ -80,7 +82,7 @@ function_compress_sam() {
 #   - Name of the output index gen
 #   - Input genome where is the fasta file
 ##############################################################################
-function_bowtie_index_ref_gen() {
+function_bowtie_create_index() {
 
     # Use a more readable variables for input parameters
     output_index_name=$1
@@ -89,7 +91,7 @@ function_bowtie_index_ref_gen() {
     # Index the reference genome using bowtie-build
     echo ""
     echo "--------------------------------------------------------------------------------------------------------------------------------------"
-    echo "$(function_get_now) index_ref_gen(): Start indexing ${input_genome_path} to ${output_index_name}"
+    echo "$(function_get_now) function_bowtie_create_index(): Start indexing ${input_genome_path} to ${output_index_name}"
     echo "--------------------------------------------------------------------------------------------------------------------------------------"
     bowtie-build $input_genome_path $output_index_name
 }
@@ -113,9 +115,10 @@ main_bowtie_align() {
     mkdir $path_index
 
     # Index reference genome
-    index_files="${path_index}/index_`basename ${input_reference_genome%.*}`"
-    function_bowtie_index_ref_gen $index_files $input_reference_genome
+    path_data="data"
+    index_files="${path_data}/${path_index}/index_`basename ${input_reference_genome%.*}`"
+    function_bowtie_create_index $index_files $input_reference_genome
 
     # Align gen samples with reference genome
-    function_bowtie_alignement_genome $index_files $number_missmatch
+    function_bowtie_alignement_genome $index_files $number_missmatch $path_data
 }
