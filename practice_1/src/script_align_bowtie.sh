@@ -137,8 +137,12 @@ main_bowtie_create_index() {
     # Create directory for index
     mkdir $path_index
 
-    # Index reference genome
+    # Create the index files variable
     path_data="data"
     index_files="${path_index}/index_`basename ${reference_genome%.*}`"
+    
+    # Index reference genome
     function_bowtie_create_index $index_files $reference_genome
+
+    return $index_files
 }
