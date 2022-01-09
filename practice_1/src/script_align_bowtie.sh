@@ -118,6 +118,8 @@ main_bowtie_align() {
     path_results=$4
 
     # Align gen samples with reference genome
+    echo ""
+    echo "$(function_get_now) Launching command: function_bowtie_alignement_genome ${path_bowtie_index} ${number_mismatch} ${path_data} ${path_results}"
     function_bowtie_alignement_genome $path_bowtie_index $number_mismatch $path_data $path_results
 }
 
