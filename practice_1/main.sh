@@ -9,12 +9,21 @@ PATH_BOWTIE_INDEX="${PATH_DATA}/bowtie_index"
 # Arguments for alignment
 REFERENCE_GENOME="${PATH_DATA}/s_cerevisiae.fasta"
 
+# Remove folders
+rm -rf $PATH_BOWTIE_INDEX
+
 # Load scripts
 #source $SCRIPT_COLLECT_DATA
 source $SCRIPT_BOWTIE_ALIGN
-<<
+
 # Create index from the reference gen
-index_files=$(main_bowtie_create_index $REFERENCE_GENOME $PATH_BOWTIE_INDEX)
+# Directory for index
+mkdir $PATH_BOWTIE_INDEX
+
+# Index files variable
+INDEX_FILES="${PATH_BOWTIE_INDEX}/index_`basename ${REFERENCE_GENOME%.*}`"
+
+function_bowtie_create_index $REFERENCE_GENOME $INDEX_FILES
 
 # Launch script allowing 1 missmatch
 NUMBER_MISSMATCHES=1
