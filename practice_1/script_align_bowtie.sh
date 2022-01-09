@@ -85,14 +85,53 @@ function_compress_sam() {
 }
 
 ##############################################################################
+# Index a genome in fasta format using bowtie library
+#
+# Arguments:
+#   - Name of the output index gen
+#   - Input genome where is the fasta file
+##############################################################################
+function_bowtie_index_ref_gen() {
+
+    # Use a more readable variables for input parameters
+    output_index_name=$1
+    input_genome_path=$2
+
+    # Index the reference genome using bowtie-build
+    echo ""
+    echo "--------------------------------------------------------------------------------------------------------------------------------------"
+    echo "$(function_get_now) index_ref_gen(): Start indexing ${input_genome_path} to ${output_index_name}"
+    echo "--------------------------------------------------------------------------------------------------------------------------------------"
+    bowtie-build $input_genome_path $output_index_name
+}
+
+##############################################################################
 # Main function to lauch all the script
 #
 # Arguments:
 #   - Number of missmatches
 ##############################################################################
 main() {
-    function_bowtie_alignement_genome index_ref $1
+
+    # Use a more readable variables for input parameters
+    number_missmatch=$1
+    input_reference_genome=$2
+
+    # Create directory for index
+    path_index="bowtie_index"
+    mkdir $path_index
+
+    # Index reference genome
+    output_files_index="${path_index}/index_`basename ${input_reference_genome%.*}`"
+    function_bowtie_index_ref_gen $output_files_index $input_reference_genome
+
+    # Align gen samples with reference genome
+    #function_bowtie_alignement_genome index_ref $number_missmatch
 }
 
+# Constants declaration
+NUMER_MISSMATCHES=$1
+REFERENCE_GENOME=$2
+
 # Launch script passing the argument 
-main $1
+main $NUMER_MISSMATCHES $REFERENCE_GENOME
