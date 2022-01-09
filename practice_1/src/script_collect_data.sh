@@ -9,9 +9,14 @@ source ./utils.sh
 # All the files are in the directory /home/practicasGenomica.
 #
 # In addition to copy the files, this functions extracts all the copied fastq.gz
+#
+# Arguments:
+#   - Parent output directory
 ##############################################################################
 copy_sample_files() {
 
+    # Input parameters to more readable variables
+    data_directory=$1
 
     # Copy original gen samples (fastq.gz) to my folder 
     for f in $(find /home/practicasGenomica/ -name "*.fastq.gz")
@@ -24,7 +29,7 @@ copy_sample_files() {
         # Get all names, removing extension and convert to lower
         file=$(basename $f)
         file=$(echo "${file%.fastq.gz}")
-        folder=$(echo $file |  awk '{print tolower($0)}')
+        folder=$(echo "$data_directory/$file" |  awk '{print tolower($0)}')
 
         # Create folder for fastaq files
         echo "$(function_get_now) copy_sample_files(): Creating directory: ${folder}"
@@ -42,7 +47,7 @@ copy_sample_files() {
     echo "--------------------------------------------------------------------------------------------------------------------------------------"
     echo "$(function_get_now) copy_sample_files(): Uncompressing files"
     echo "--------------------------------------------------------------------------------------------------------------------------------------"
-    gunzip -r ./
+    gunzip -r $data_directory
 }
 
 ##############################################################################
@@ -50,14 +55,16 @@ copy_sample_files() {
 #
 # Arguments:
 #   - Path of the reference genome
+#   - Parent output directory
 ##############################################################################
 copy_reference_genome() {
     
     # Input parameters to more readable variables
     input_reference_genome=$1
+    data_directory=$2
 
     # Create the output index genome reference
-    output_file=$(echo "./`basename $input_reference_genome`" | tr 'A-Z' 'a-z')
+    output_file=$(echo "./$data_directory/`basename $input_reference_genome`" | tr 'A-Z' 'a-z')
 
     # Copy the reference genome to our path
     echo ""
@@ -72,24 +79,19 @@ copy_reference_genome() {
 # Main function which make the following steps:
 #   1. Copy all samples of the genes
 #   2. Index the reference genome
-#
-# Arguments:
-#   - Path of the reference genome
 ##############################################################################
 main_collect_data() {
 
     # Input parameters to more readable variables
-    input_reference_genome=$1
+    input_reference_genome="/home/practicasGenomica/S_cerevisiae.fasta"
+
+    # Create directory for data
+    data_directory="data"
+    mkdir $data_directory
 
     # Copy the sample files
-    copy_sample_files
+    copy_sample_files $data_directory
 
     # Copy the reference_genome
-    copy_reference_genome $input_reference_genome
+    copy_reference_genome $input_reference_genome $data_directory
 }
-
-# Constants declaration
-REFERENCE_GENOME_PATH="/home/practicasGenomica/S_cerevisiae.fasta"
-
-# Call main method
-main $REFERENCE_GENOME_PATH
