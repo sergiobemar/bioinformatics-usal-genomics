@@ -2,7 +2,7 @@
 
 
 # Load libraries
-source ./utils.sh
+source ./src/utils.sh
 
 ##############################################################################
 # Copy all sample of genomes to the currect directory.
@@ -36,7 +36,7 @@ copy_sample_files() {
         mkdir $folder
 
         # Copy files to directory
-        echo "copy_sample_files(): Copy file ${f} to ${folder}"
+        echo "$(function_get_now) copy_sample_files(): Copy file ${f} to ${folder}"
         cp $f $folder
 
         rename_to_lower_files $(find $folder -name "*.fastq.gz")
