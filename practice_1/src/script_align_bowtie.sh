@@ -54,7 +54,7 @@ function_bowtie_alignement_genome() {
         function_compress_sam $sam_result $bam_result
 
         # Index .bam result to baiecho 
-	echo ""
+	    echo ""
         echo "$(function_get_now) function_alignement_genome(): Indexing BAM file, the result will be saved in ${bai_result}"
         samtools index $bam_result $bai_result
     done
