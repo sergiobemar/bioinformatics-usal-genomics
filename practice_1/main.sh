@@ -26,5 +26,5 @@ INDEX_FILES="${PATH_BOWTIE_INDEX}/index_`basename ${REFERENCE_GENOME%.*}`"
 function_bowtie_create_index $REFERENCE_GENOME $INDEX_FILES
 
 # Launch script allowing 1 mismatch
-NUMBER_mismatchES=1
-main_bowtie_align $PATH_BOWTIE_INDEX $NUMBER_mismatchES $PATH_DATA $PATH_RESULTS
+NUMBER_MISMATCHES=1
+main_bowtie_align $PATH_BOWTIE_INDEX $NUMBER_MISMATCHES $PATH_DATA $PATH_RESULTS
