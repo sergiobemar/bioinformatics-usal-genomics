@@ -100,7 +100,52 @@ function_bowtie_create_index() {
 }
 
 ##############################################################################
-# Main function to lauch all the script to align the sample genes with
+# Index a genome in fasta format using BWA library
+#
+# Arguments:
+#   - Input genome where is the fasta file
+#   - Name of the output index gen
+##############################################################################
+function_bwa_create_index() {
+
+    # Use a more readable variables for input parameters
+    input_genome_path=$1
+    output_index_name=$2
+
+    # Index the reference genome using bowtie-build
+    echo ""
+    echo "--------------------------------------------------------------------------------------------------------------------------------------"
+    echo "$(function_get_now) function_bwa_create_index(): Start indexing ${input_genome_path} to ${output_index_name}"
+    echo "--------------------------------------------------------------------------------------------------------------------------------------"
+     bwa index -p $output_index_name $input_genome_path
+}
+
+##############################################################################
+# Main function to lauch all the script to align the sample genes using Bowtie with
+# the index allowing n mismatches passed as argument
+#
+# Arguments:
+#   - Path of the index reference genome
+#   - Number of mismatches
+#   - Path of directory where the data is going to be stored
+#   - Path of directory where the results is going to be stored
+##############################################################################
+main_bowtie_align() {
+
+    # Use a more readable variables for input parameters
+    path_bowtie_index=$1
+    number_mismatch=$2
+    path_data=$3
+    path_results=$4
+
+    # Align gen samples with reference genome
+    echo ""
+    echo "$(function_get_now) Launching command: function_bowtie_alignement_genome ${path_bowtie_index} ${number_mismatch} ${path_data} ${path_results}"
+    function_bowtie_alignement_genome $path_bowtie_index $number_mismatch $path_data $path_results
+}
+
+##############################################################################
+# Main function to lauch all the script to align the sample genes using BWA with
 # the index allowing n mismatches passed as argument
 #
 # Arguments:

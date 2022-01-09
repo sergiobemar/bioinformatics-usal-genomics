@@ -9,7 +9,7 @@
 # Constants declaration
 SRC="./src"
 SCRIPT_COLLECT_DATA="${SRC}/script_collect_data.sh"
-SCRIPT_BOWTIE_ALIGN="${SRC}/script_align_bowtie.sh"
+SCRIPT_BOWTIE_ALIGN="${SRC}/script_align.sh"
 SCRIPT_UTILS="${SRC}/utils.sh"
 PATH_DATA="./data"
 PATH_RESULTS="./results"
