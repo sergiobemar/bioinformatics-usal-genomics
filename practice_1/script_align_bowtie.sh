@@ -122,11 +122,11 @@ main() {
     mkdir $path_index
 
     # Index reference genome
-    output_files_index="${path_index}/index_`basename ${input_reference_genome%.*}`"
-    function_bowtie_index_ref_gen $output_files_index $input_reference_genome
+    index_files="${path_index}/index_`basename ${input_reference_genome%.*}`"
+    function_bowtie_index_ref_gen $index_files $input_reference_genome
 
     # Align gen samples with reference genome
-    #function_bowtie_alignement_genome index_ref $number_missmatch
+    function_bowtie_alignement_genome $index_files $number_missmatch
 }
 
 # Constants declaration
