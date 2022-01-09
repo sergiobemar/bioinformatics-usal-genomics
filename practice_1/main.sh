@@ -20,11 +20,11 @@ source $SCRIPT_BOWTIE_ALIGN
 # Directory for index
 mkdir $PATH_BOWTIE_INDEX
 
-# Index files variable
+# Create index files variable and launch the index generation
 INDEX_FILES="${PATH_BOWTIE_INDEX}/index_`basename ${REFERENCE_GENOME%.*}`"
 
 function_bowtie_create_index $REFERENCE_GENOME $INDEX_FILES
 
 # Launch script allowing 1 missmatch
 NUMBER_MISSMATCHES=1
-#main_bowtie_align $PATH_BOWTIE_INDEX $NUMBER_MISSMATCHES $PATH_DATA $PATH_RESULTS
+main_bowtie_align $PATH_BOWTIE_INDEX $NUMBER_MISSMATCHES $PATH_DATA $PATH_RESULTS

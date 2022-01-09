@@ -94,7 +94,7 @@ function_bowtie_create_index() {
     # Index the reference genome using bowtie-build
     echo ""
     echo "--------------------------------------------------------------------------------------------------------------------------------------"
-    echo "$(function_get_now) ${0}: Start indexing ${input_genome_path} to ${output_index_name}"
+    echo "$(function_get_now) function_bowtie_create_index(): Start indexing ${input_genome_path} to ${output_index_name}"
     echo "--------------------------------------------------------------------------------------------------------------------------------------"
     bowtie-build $input_genome_path $output_index_name
 }
