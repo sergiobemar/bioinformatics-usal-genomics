@@ -88,7 +88,7 @@ function_bwa_alignement_genome() {
        
         # Extract file (with extension) and filename (without extension)
         file=$(basename $f)
-        filename_result="$results_directory/${file%.*}_${2}"
+        filename_result="$results_directory/${file%.*}"
         dir=$(dirname $f)
 
         # Create the variables with the names for files SAM, BAM and BAI

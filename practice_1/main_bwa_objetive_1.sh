@@ -42,4 +42,4 @@ function_bwa_create_index $REFERENCE_GENOME $BWA_INDEX_FILES
 # Launch script allowing 1 missmatch
 NUMBER_MISMATCHES=1
 #echo "$(function_get_now) launching command: main_bwa_align ${BWA_INDEX_FILES} ${NUMBER_MISMATCHES} ${PATH_DATA} ${PATH_RESULTS}"
-#main_bwa_align $BWA_INDEX_FILES $NUMBER_MISMATCHES $PATH_DATA $PATH_RESULTS
+main_bwa_align $BWA_INDEX_FILES $PATH_DATA $PATH_RESULTS
