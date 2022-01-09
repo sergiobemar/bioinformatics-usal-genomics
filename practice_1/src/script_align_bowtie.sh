@@ -5,13 +5,13 @@ source ./src/utils.sh
 
 ##############################################################################
 # Alignes a genome with its referency gen using bowtie 
-# with the number of missmatches setting by an argument.
+# with the number of mismatches setting by an argument.
 #
 # It creates a .sam file with the alignement which will be compressed to a .bam file
 #
 # Arguments:
 #   - Reference gen indexed previously
-#   - Number of missmatches
+#   - Number of mismatches
 #   - Path of directory where the data is stored
 #   - Path of directory where the results is going to be saved
 ##############################################################################
@@ -19,12 +19,12 @@ function_bowtie_alignement_genome() {
 
     # Use a more readable variables for input parameters
     index_ref=$1
-    number_missmatch=$2
+    number_mismatch=$2
     path_data=$3
     path_results=$4
 
     # Create directory for results
-    results_directory="${path_results}/bowtie_results_missmatch_missmatches_${number_missmatch}"
+    results_directory="${path_results}/bowtie_results_mismatch_mismatches_${number_mismatch}"
     mkdir $results_directory
 
     for f in $(find $path_data -name "*.fastq")
@@ -45,16 +45,16 @@ function_bowtie_alignement_genome() {
         echo "$(function_get_now) function_alignement_genome(): Align file ${f} to ${sam_result}"
         echo "--------------------------------------------------------------------------------------------------------------------------------------"
 
-        # Alignement using bowtie with 1 missmatch
+        # Alignement using bowtie with 1 mismatch
         echo ""
         echo "$(function_get_now) function_alignement_genome(): Aligning genome using bowtie"
-        bowtie -t -p 16 -v $number_missmatch -S $index_ref $f $sam_result
+        bowtie -t -p 16 -v $number_mismatch -S $index_ref $f $sam_result
 
         # Compress .sam to .bam file
         function_compress_sam $sam_result $bam_result
 
         # Index .bam result to baiecho 
-	echo ""
+	    echo ""
         echo "$(function_get_now) function_alignement_genome(): Indexing BAM file, the result will be saved in ${bai_result}"
         samtools index $bam_result $bai_result
     done
@@ -101,11 +101,11 @@ function_bowtie_create_index() {
 
 ##############################################################################
 # Main function to lauch all the script to align the sample genes with
-# the index allowing n missmatches passed as argument
+# the index allowing n mismatches passed as argument
 #
 # Arguments:
 #   - Path of the index reference genome
-#   - Number of missmatches
+#   - Number of mismatches
 #   - Path of directory where the data is going to be stored
 #   - Path of directory where the results is going to be stored
 ##############################################################################
@@ -113,12 +113,12 @@ main_bowtie_align() {
 
     # Use a more readable variables for input parameters
     path_bowtie_index=$1
-    number_missmatch=$2
+    number_mismatch=$2
     path_data=$3
     path_results=$4
 
     # Align gen samples with reference genome
-    function_bowtie_alignement_genome $path_bowtie_index $number_missmatch $path_data $path_results
+    function_bowtie_alignement_genome $path_bowtie_index $number_mismatch $path_data $path_results
 }
 
 ##############################################################################
