@@ -31,7 +31,7 @@ function_bowtie_alignement_genome() {
     number_missmatch=$2
 
     # Create directory for results
-    results_directory="bowtie_results_missmatch_${number_missmatch}"
+    results_directory="bowtie_results_missmatch_missmatches_${number_missmatch}"
     mkdir $results_directory
 
     for f in $(find . -name "*.fastq")
