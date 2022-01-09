@@ -42,11 +42,12 @@ BOWTIE_INDEX_FILES="${PATH_BOWTIE_INDEX}/index_`basename ${REFERENCE_GENOME%.*}`
 ############################################################
 # Get the options
 options=$(getopt -l "align,collect,index" -o "aci" -a -- "$@")
+eval set -- "$options"
 
 
 while true; do
-    case $options in
-        a|--align)) # Align
+    case $1 in
+        a|--align) # Align
             number_mismatch=$OPTARG
             echo "Number of mismatches: ${number_mismatch}"
             exit;;
