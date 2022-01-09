@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 ##############################################################################
 # Return the current date tiem in string format without spaces, for namefiles
 ##############################################################################
@@ -7,6 +8,12 @@ function_get_now() {
     date +"%Y-%m-%d %H:%M:%S"
 }
 
+##############################################################################
+# Rename all the files of the input directory using lowercase
+#
+# Arguments:
+#   - Input directory
+##############################################################################
 rename_to_lower_files() {
 
     echo ""
@@ -19,6 +26,12 @@ rename_to_lower_files() {
     done
 }
 
+##############################################################################
+# Copy all sample of genomes to the currect directory.
+# All the files are in the directory /home/practicasGenomica.
+#
+# In addition to copy the files, this functions extracts all the copied fastq.gz
+##############################################################################
 copy_sample_files() {
 
 
@@ -54,25 +67,51 @@ copy_sample_files() {
     gunzip -r ./
 }
 
-index_ref_gen() {
+##############################################################################
+# Copy reference genome to the current directory
+#
+# Arguments:
+#   - Path of the reference genome
+##############################################################################
+copy_reference_genome() {
+    
+    # Input parameters to more readable variables
+    input_reference_genome=$1
+
+    # Create the output index genome reference
+    output_file=$(echo "./`basename $input_reference_genome`" | tr 'A-Z' 'a-z')
 
     # Copy the reference genome to our path
-    cp /home/practicasGenomica/S_cerevisiae.fasta ./
-
-    # Index the reference genome using bowtie-build
     echo ""
     echo "--------------------------------------------------------------------------------------------------------------------------------------"
-    echo "$(function_get_now) index_ref_gen(): Start indexing to ${1}"
+    echo "$(function_get_now) copy_reference_genome(): Copying reference genome from ${input_reference_genome} to ${output_file}"
     echo "--------------------------------------------------------------------------------------------------------------------------------------"
-    bowtie-build S_cerevisiae.fasta $1
+
+    cp $input_reference_genome $output_file
 }
 
+##############################################################################
+# Main function which make the following steps:
+#   1. Copy all samples of the genes
+#   2. Index the reference genome
+#
+# Arguments:
+#   - Path of the reference genome
+##############################################################################
 main() {
+
+    # Input parameters to more readable variables
+    input_reference_genome=$1
+
     # Copy the sample files
     copy_sample_files
 
-    # Create the index
-    index_ref_gen "index_ref"
+    # Copy the reference_genome
+    copy_reference_genome $input_reference_genome
 }
 
-main
+# Constants declaration
+REFERENCE_GENOME_PATH="/home/practicasGenomica/S_cerevisiae.fasta"
+
+# Call main method
+main $REFERENCE_GENOME_PATH
