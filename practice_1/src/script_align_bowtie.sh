@@ -122,3 +122,23 @@ main_bowtie_align() {
     # Align gen samples with reference genome
     function_bowtie_alignement_genome $index_files $number_missmatch $path_data
 }
+
+##############################################################################
+# Main function to the index of the reference genome
+#
+# Arguments:
+#   - Path of the index
+##############################################################################
+main_bowtie_create_index() {
+    # Use a more readable variables for input parameters
+    input_reference_genome=$1
+
+    # Create directory for index
+    path_index="bowtie_index"
+    mkdir $path_index
+
+    # Index reference genome
+    path_data="data"
+    index_files="${path_data}/${path_index}/index_`basename ${input_reference_genome%.*}`"
+    function_bowtie_create_index $index_files $input_reference_genome
+}
