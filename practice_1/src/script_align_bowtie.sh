@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load libraries
-source ./utils.sh
+source ./src/utils.sh
 
 ##############################################################################
 # Alignes a genome with its referency gen using bowtie 
