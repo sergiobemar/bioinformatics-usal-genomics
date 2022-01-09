@@ -82,14 +82,14 @@ function_compress_sam() {
 # Index a genome in fasta format using bowtie library
 #
 # Arguments:
-#   - Name of the output index gen
 #   - Input genome where is the fasta file
+#   - Name of the output index gen
 ##############################################################################
 function_bowtie_create_index() {
 
     # Use a more readable variables for input parameters
-    output_index_name=$1
-    input_genome_path=$2
+    input_genome_path=$1
+    output_index_name=$2
 
     # Index the reference genome using bowtie-build
     echo ""
