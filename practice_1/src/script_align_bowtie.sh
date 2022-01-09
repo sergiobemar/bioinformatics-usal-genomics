@@ -95,13 +95,14 @@ function_bowtie_index_ref_gen() {
 }
 
 ##############################################################################
-# Main function to lauch all the script
+# Main function to lauch all the script to align the sample genes with
+# the index allowing n missmatches passed as argument
 #
 # Arguments:
 #   - Path of the index gen
 #   - Number of missmatches
 ##############################################################################
-main() {
+main_bowtie_align() {
 
     # Use a more readable variables for input parameters
     input_reference_genome=$1
@@ -118,10 +119,3 @@ main() {
     # Align gen samples with reference genome
     function_bowtie_alignement_genome $index_files $number_missmatch
 }
-
-# Constants declaration
-REFERENCE_GENOME=$1
-NUMBER_MISSMATCHES=$2
-
-# Launch script passing the argument 
-main $REFERENCE_GENOME $NUMBER_MISSMATCHES

@@ -76,7 +76,7 @@ copy_reference_genome() {
 # Arguments:
 #   - Path of the reference genome
 ##############################################################################
-main() {
+main_collect_data() {
 
     # Input parameters to more readable variables
     input_reference_genome=$1
