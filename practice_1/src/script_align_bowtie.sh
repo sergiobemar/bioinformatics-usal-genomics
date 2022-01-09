@@ -104,7 +104,7 @@ function_bowtie_create_index() {
 # the index allowing n missmatches passed as argument
 #
 # Arguments:
-#   - Path of the index gen
+#   - Path of the index reference genome
 #   - Number of missmatches
 #   - Path of directory where the data is going to be stored
 #   - Path of directory where the results is going to be stored
@@ -112,39 +112,33 @@ function_bowtie_create_index() {
 main_bowtie_align() {
 
     # Use a more readable variables for input parameters
-    input_reference_genome=$1
+    path_bowtie_index=$1
     number_missmatch=$2
     path_data=$3
     path_results=$4
 
-    # Create directory for index
-    path_index="${path_data}/bowtie_index"
-    mkdir $path_index
-
-    # Index reference genome
-    index_files="${path_index}/index_`basename ${input_reference_genome%.*}`"
-    function_bowtie_create_index $index_files $input_reference_genome
-
     # Align gen samples with reference genome
-    function_bowtie_alignement_genome $index_files $number_missmatch $path_data $path_results
+    function_bowtie_alignement_genome $path_bowtie_index $number_missmatch $path_data $path_results
 }
 
 ##############################################################################
 # Main function to the index of the reference genome
 #
 # Arguments:
-#   - Path of the index
+#   - Input path of the reference genome
+#   - Output path of the index created by bowtie
 ##############################################################################
 main_bowtie_create_index() {
+
     # Use a more readable variables for input parameters
-    input_reference_genome=$1
+    reference_genome=$1
+    path_index=$2
 
     # Create directory for index
-    path_index="bowtie_index"
     mkdir $path_index
 
     # Index reference genome
     path_data="data"
-    index_files="${path_data}/${path_index}/index_`basename ${input_reference_genome%.*}`"
-    function_bowtie_create_index $index_files $input_reference_genome
+    index_files="${path_index}/index_`basename ${reference_genome%.*}`"
+    function_bowtie_create_index $index_files $reference_genome
 }
