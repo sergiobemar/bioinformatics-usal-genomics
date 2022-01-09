@@ -55,14 +55,14 @@ function_bowtie_alignement_genome() {
         # Alignement using bowtie with 1 missmatch
         echo ""
         echo "$(function_get_now) function_alignement_genome(): Aligning genome using bowtie"
-        bowtie -t -p 16 -v $number_missmatch -S $index_ref $f $sam_result
+        #bowtie -t -p 16 -v $number_missmatch -S $index_ref $f $sam_result
 
         # Compress .sam to .bam file
-        function_compress_sam $sam_result $bam_result
+        #function_compress_sam $sam_result $bam_result
 
         # Index .bam result to baiecho ""
         echo "$(function_get_now) function_alignement_genome(): Indexing BAM file, the result will be saved in ${bai_result}"
-        samtools index $bam_result $bai_result
+        #samtools index $bam_result $bai_result
     done
 }
 
@@ -109,13 +109,14 @@ function_bowtie_index_ref_gen() {
 # Main function to lauch all the script
 #
 # Arguments:
+#   - Path of the index gen
 #   - Number of missmatches
 ##############################################################################
 main() {
 
     # Use a more readable variables for input parameters
-    number_missmatch=$1
-    input_reference_genome=$2
+    input_reference_genome=$1
+    number_missmatch=$2
 
     # Create directory for index
     path_index="bowtie_index"
@@ -130,8 +131,8 @@ main() {
 }
 
 # Constants declaration
-NUMER_MISSMATCHES=$1
-REFERENCE_GENOME=$2
+REFERENCE_GENOME=$1
+NUMBER_MISSMATCHES=$2
 
 # Launch script passing the argument 
-main $NUMER_MISSMATCHES $REFERENCE_GENOME
+main $REFERENCE_GENOME $NUMBER_MISSMATCHES
