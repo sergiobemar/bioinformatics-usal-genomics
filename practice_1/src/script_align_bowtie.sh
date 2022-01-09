@@ -13,6 +13,7 @@ source ./src/utils.sh
 #   - Reference gen indexed previously
 #   - Number of missmatches
 #   - Path of directory where the data is stored
+#   - Path of directory where the results is going to be saved
 ##############################################################################
 function_bowtie_alignement_genome() {
 
@@ -20,9 +21,10 @@ function_bowtie_alignement_genome() {
     index_ref=$1
     number_missmatch=$2
     path_data=$3
+    path_results=$4
 
     # Create directory for results
-    results_directory="${path_data}/bowtie_results_missmatch_missmatches_${number_missmatch}"
+    results_directory="${path_results}/bowtie_results_missmatch_missmatches_${number_missmatch}"
     mkdir $results_directory
 
     for f in $(find $path_data -name "*.fastq")
@@ -46,14 +48,15 @@ function_bowtie_alignement_genome() {
         # Alignement using bowtie with 1 missmatch
         echo ""
         echo "$(function_get_now) function_alignement_genome(): Aligning genome using bowtie"
-        #bowtie -t -p 16 -v $number_missmatch -S $index_ref $f $sam_result
+        bowtie -t -p 16 -v $number_missmatch -S $index_ref $f $sam_result
 
         # Compress .sam to .bam file
-        #function_compress_sam $sam_result $bam_result
+        function_compress_sam $sam_result $bam_result
 
-        # Index .bam result to baiecho ""
+        # Index .bam result to baiecho 
+	echo ""
         echo "$(function_get_now) function_alignement_genome(): Indexing BAM file, the result will be saved in ${bai_result}"
-        #samtools index $bam_result $bai_result
+        samtools index $bam_result $bai_result
     done
 }
 
@@ -103,22 +106,25 @@ function_bowtie_create_index() {
 # Arguments:
 #   - Path of the index gen
 #   - Number of missmatches
+#   - Path of directory where the data is going to be stored
+#   - Path of directory where the results is going to be stored
 ##############################################################################
 main_bowtie_align() {
 
     # Use a more readable variables for input parameters
     input_reference_genome=$1
     number_missmatch=$2
+    path_data=$3
+    path_results=$4
 
     # Create directory for index
-    path_index="bowtie_index"
+    path_index="${path_data}/bowtie_index"
     mkdir $path_index
 
     # Index reference genome
-    path_data="data"
-    index_files="${path_data}/${path_index}/index_`basename ${input_reference_genome%.*}`"
+    index_files="${path_index}/index_`basename ${input_reference_genome%.*}`"
     function_bowtie_create_index $index_files $input_reference_genome
 
     # Align gen samples with reference genome
-    function_bowtie_alignement_genome $index_files $number_missmatch $path_data
+    function_bowtie_alignement_genome $index_files $number_missmatch $path_data $path_results
 }
