@@ -41,7 +41,7 @@ copy_reference_genome $PATH_ORIGIN_REFERENCE_GENOME $PATH_BOWTIE_INDEX
 # Create index files variable and launch the index generation
 BOWTIE_INDEX_FILES="${PATH_BOWTIE_INDEX}/index_${REFERENCE_GENOME_NAME}"
 
-#function_bowtie_create_index $REFERENCE_GENOME $BOWTIE_INDEX_FILES
+function_bowtie_create_index $REFERENCE_GENOME $BOWTIE_INDEX_FILES
 
 # Launch script allowing 1 missmatch
 #NUMBER_MISMATCHES=1
