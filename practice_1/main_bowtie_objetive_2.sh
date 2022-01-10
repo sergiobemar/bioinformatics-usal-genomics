@@ -19,7 +19,7 @@ PATH_BOWTIE_INDEX="${PATH_DATA}/bowtie_index_${REFERENCE_GENOME_NAME}"
 PATH_ORIGIN_REFERENCE_GENOME="/home/practicasGenomica/${REFERENCE_GENOME_FILE}"
 
 # Arguments for alignment
-REFERENCE_GENOME=$(echo "${PATH_DATA}/${REFERENCE_GENOME_NAME}")
+REFERENCE_GENOME=$(echo "${PATH_DATA}/${REFERENCE_GENOME_NAME}.fasta")
 
 # Remove folders
 rm -rf $PATH_BOWTIE_INDEX
@@ -40,7 +40,7 @@ copy_reference_genome $PATH_ORIGIN_REFERENCE_GENOME $PATH_DATA
 
 # Create index files variable and launch the index generation
 BOWTIE_INDEX_FILES="${PATH_BOWTIE_INDEX}/index_${REFERENCE_GENOME_NAME}"
-
+echo "BOWTIE_INDEX: ${BOWTIE_INDEX_FILES}"
 function_bowtie_create_index $REFERENCE_GENOME $BOWTIE_INDEX_FILES
 
 # Launch script allowing 1 missmatch
