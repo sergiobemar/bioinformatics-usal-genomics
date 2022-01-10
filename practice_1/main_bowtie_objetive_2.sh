@@ -22,7 +22,7 @@ PATH_ORIGIN_REFERENCE_GENOME="/home/practicasGenomica/${REFERENCE_GENOME_FILE}"
 REFERENCE_GENOME=$(echo "${PATH_DATA}/${REFERENCE_GENOME_NAME}.fasta")
 
 # Remove folders
-rm -rf $PATH_BOWTIE_INDEX
+#rm -rf $PATH_BOWTIE_INDEX
 
 # Create folders
 mkdir -p $PATH_DATA
@@ -36,19 +36,14 @@ source $SCRIPT_BOWTIE_ALIGN
 # Create index from the reference gen
 # Directory for index and copy reference genome
 mkdir $PATH_BOWTIE_INDEX
-copy_reference_genome $PATH_ORIGIN_REFERENCE_GENOME $PATH_DATA
+#copy_reference_genome $PATH_ORIGIN_REFERENCE_GENOME $PATH_DATA
 
 # Create index files variable and launch the index generation
 BOWTIE_INDEX_FILES="${PATH_BOWTIE_INDEX}/index_${REFERENCE_GENOME_NAME}"
 echo "BOWTIE_INDEX: ${BOWTIE_INDEX_FILES}"
-function_bowtie_create_index $REFERENCE_GENOME $BOWTIE_INDEX_FILES
+#function_bowtie_create_index $REFERENCE_GENOME $BOWTIE_INDEX_FILES
 
 # Launch script allowing 1 missmatch
-#NUMBER_MISMATCHES=1
-#echo "$(function_get_now) launching command: main_bowtie_align ${BOWTIE_INDEX_FILES} ${NUMBER_MISMATCHES} ${PATH_DATA} ${PATH_RESULTS}"
-#main_bowtie_align $BOWTIE_INDEX_FILES $NUMBER_MISMATCHES $PATH_DATA $PATH_RESULTS
-
-# Launch script allowing 3 missmatch
-#NUMBER_MISMATCHES=3
-#echo "$(function_get_now) launching command: main_bowtie_align ${BOWTIE_INDEX_FILES} ${NUMBER_MISMATCHES} ${PATH_DATA} ${PATH_RESULTS}"
-#main_bowtie_align $BOWTIE_INDEX_FILES $NUMBER_MISMATCHES $PATH_DATA $PATH_RESULTS
+NUMBER_MISMATCHES=1
+echo "$(function_get_now) launching command: main_bowtie_align ${BOWTIE_INDEX_FILES} ${NUMBER_MISMATCHES} ${PATH_DATA} ${PATH_RESULTS}"
+main_bowtie_align $BOWTIE_INDEX_FILES $NUMBER_MISMATCHES $PATH_DATA $PATH_RESULTS
