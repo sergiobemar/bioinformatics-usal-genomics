@@ -25,7 +25,7 @@ REFERENCE_GENOME=$(echo "${PATH_DATA}/${REFERENCE_GENOME_NAME}")
 rm -rf $PATH_BOWTIE_INDEX
 
 # Create folders
-mkdir -p  $PATH_DATA
+mkdir -p $PATH_DATA
 mkdir -p $PATH_RESULTS
 
 # Load scripts
@@ -34,9 +34,9 @@ source $SCRIPT_COLLECT_DATA
 source $SCRIPT_BOWTIE_ALIGN
 
 # Create index from the reference gen
-# Directory for index
+# Directory for index and copy reference genome
 mkdir $PATH_BOWTIE_INDEX
-copy_reference_genome $PATH_ORIGIN_REFERENCE_GENOME $PATH_BOWTIE_INDEX
+copy_reference_genome $PATH_ORIGIN_REFERENCE_GENOME $PATH_DATA
 
 # Create index files variable and launch the index generation
 BOWTIE_INDEX_FILES="${PATH_BOWTIE_INDEX}/index_${REFERENCE_GENOME_NAME}"
