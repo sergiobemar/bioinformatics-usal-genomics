@@ -64,7 +64,7 @@ copy_reference_genome() {
     data_directory=$2
 
     # Create the output index genome reference
-    output_file=$(echo "./$data_directory/`basename $input_reference_genome`" | tr 'A-Z' 'a-z')
+    output_file=$(echo "$data_directory/`basename $input_reference_genome`" | tr 'A-Z' 'a-z')
 
     # Copy the reference genome to our path
     echo ""
