@@ -14,7 +14,7 @@ SCRIPT_UTILS="${SRC}/utils.sh"
 PATH_DATA="./data"
 PATH_RESULTS="./results/objetive_2"
 REFERENCE_GENOME_FILE="Bretanomyces_b.fasta"
-REFERENCE_GENOME_NAME=$(basename $REFERENCE_GENOME_FILE | tr 'A-Z' 'a-z')
+REFERENCE_GENOME_NAME=$(basename ${REFERENCE_GENOME_FILE%.fasta} | tr 'A-Z' 'a-z')
 PATH_BOWTIE_INDEX="${PATH_DATA}/bowtie_index_${REFERENCE_GENOME_NAME}"
 PATH_ORIGIN_REFERENCE_GENOME="/home/practicasGenomica/${REFERENCE_GENOME_FILE}"
 
