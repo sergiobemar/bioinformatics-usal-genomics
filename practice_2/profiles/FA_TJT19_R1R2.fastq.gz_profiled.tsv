@@ -1,0 +1,26 @@
+#mpa_v30_CHOCOPhlAn_201901
+#/usr/local/bin/metaphlan /home/data/practica2_genomica//FA_TJT19_R1R2.fastq.gz --input_type fastq --bowtie2out bowtie2/FA_TJT19_R1R2.fastq.gz.bowtie2.bz2 -o profiles/FA_TJT19_R1R2.fastq.gz_profiled.tsv
+#SampleID	Metaphlan_Analysis
+#clade_name	NCBI_tax_id	relative_abundance	additional_species
+k__Eukaryota	2759	98.96439	
+k__Bacteria	2	1.03561	
+k__Eukaryota|p__Ascomycota	2759|4890	98.96439	
+k__Bacteria|p__Proteobacteria	2|1224	0.81484	
+k__Bacteria|p__Firmicutes	2|1239	0.22077	
+k__Eukaryota|p__Ascomycota|c__Saccharomycetes	2759|4890|4891	98.96439	
+k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria	2|1224|28211	0.81484	
+k__Bacteria|p__Firmicutes|c__Bacilli	2|1239|91061	0.22077	
+k__Eukaryota|p__Ascomycota|c__Saccharomycetes|o__Saccharomycetales	2759|4890|4891|4892	98.96439	
+k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodospirillales	2|1224|28211|204441	0.81484	
+k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales	2|1239|91061|186826	0.22077	
+k__Eukaryota|p__Ascomycota|c__Saccharomycetes|o__Saccharomycetales|f__Saccharomycetaceae	2759|4890|4891|4892|4893	98.96439	
+k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodospirillales|f__Acetobacteraceae	2|1224|28211|204441|433	0.81484	
+k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae	2|1239|91061|186826|33958	0.22077	
+k__Eukaryota|p__Ascomycota|c__Saccharomycetes|o__Saccharomycetales|f__Saccharomycetaceae|g__Saccharomyces	2759|4890|4891|4892|4893|4930	98.96439	
+k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodospirillales|f__Acetobacteraceae|g__Komagataeibacter	2|1224|28211|204441|433|1434011	0.81484	
+k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus	2|1239|91061|186826|33958|1578	0.22077	
+k__Eukaryota|p__Ascomycota|c__Saccharomycetes|o__Saccharomycetales|f__Saccharomycetaceae|g__Saccharomyces|s__Saccharomyces_cerevisiae	2759|4890|4891|4892|4893|4930|4932	98.95747	k__Eukaryota|p__Ascomycota|c__Saccharomycetes|o__Saccharomycetales|f__Saccharomycetaceae|g__Saccharomyces|s__Saccharomyces_sp_boulardii
+k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodospirillales|f__Acetobacteraceae|g__Komagataeibacter|s__Komagataeibacter_saccharivorans	2|1224|28211|204441|433|1434011|265959	0.80197	
+k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus|s__Lactobacillus_kunkeei	2|1239|91061|186826|33958|1578|148814	0.22077	
+k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodospirillales|f__Acetobacteraceae|g__Komagataeibacter|s__Komagataeibacter_xylinus	2|1224|28211|204441|433|1434011|28448	0.01288	
+k__Eukaryota|p__Ascomycota|c__Saccharomycetes|o__Saccharomycetales|f__Saccharomycetaceae|g__Saccharomyces|s__Saccharomyces_kudriavzevii	2759|4890|4891|4892|4893|4930|114524	0.00692	
